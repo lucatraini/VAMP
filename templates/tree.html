@@ -1,0 +1,70 @@
+<html>
+
+<head>
+ 
+  <link rel="stylesheet" type="text/css" href="static/style.css">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+
+</head>
+
+<body>
+  <script type="text/javascript" src="static/pie_chart.js"></script>
+  <script type="text/javascript" src="static/tree_timestamp.js"></script>
+  <script type="text/javascript" src="static/tree_timestampLatency.js"></script>
+  <script type="text/javascript" src="static/latency_tree.js"></script>
+ <div class="tree" id="tree">
+  <div class="name" style="position:absolute;left:2100px;top:80px"></div>
+    <form>
+      <select id="service" style=" width: 400px; height: 50px; font-size: 20px;">
+        {% for item in data %}
+        <option value="{{item}}" style="font-weight: bold; font-size: 50px;">{{item}}</option>
+        {% endfor %}
+      </select>
+      <input type="search" id="searchBox" placeholder="Search..." style="width: 400px; height: 50px; font-size: 20px;">
+      <button type="button" id="myBtn" onclick="javascript:onChange()" style="width: 120px; height: 50px; font-size: 20px;">Search</button>
+      
+      <text style="font-size:22px; font-weight: bold;">FROM:</text>
+      <input id="date_from" type="date" name="task_date_from" style="width: 160px; height: 50px; font-size: 20px;" />
+      <input id="time_from" type="time" name="task_time_from" style="width: 140px; height: 50px; font-size: 20px;"/>
+
+      <text style="font-size:22px; font-weight: bold;">TO:</text>
+      <input id="date_to" type="date" name="task_date_to" style="width: 160px; height: 50px; font-size: 20px;" />
+      <input id="time_to" type="time" name="task_time_to" style="width: 140px; height: 50px; font-size: 20px;"/>
+
+      <button type='button' id="calc" style="width: 120px; height: 50px; font-size: 20px;">Search</button>
+      
+      <select id="compare" style=" width: 300px; height: 50px; font-size: 20px;">
+        <option value="Compare Occurrences" style="font-weight: bold; font-size: 50px;">Compare Occurrences</option>
+        <option value="Compare Latency" style="font-weight: bold; font-size: 50px;">Compare Latency</option>
+      </select>
+      <select id="dataset" style=" width: 300px; height: 50px; font-size: 20px;">
+        {% for item in dataset %}
+          <option id="dataset{{item.id}}" value='{{item.id}}' data-from="{{item.from}}" data-to="{{item.to}}"  style="font-weight: bold; font-size: 50px;">Dataset {{item.id}}</option>
+        {% endfor %}
+      </select>
+    </form>
+    <script type="text/javascript" src="static/tree.js"></script>
+
+  </div>
+
+  <div style="position:absolute;top: 70px;left: 2000px;border: 3px solid #000000;" class="barchart" id="barchart">
+    <script type="text/javascript" src="static/histogram_group.js"></script>
+    <script type="text/javascript" src="static/double_histogram.js"></script>
+    <script type="text/javascript" src="static/tree_from_hist.js"></script>
+    <script type="text/javascript" src="static/double_histogram_latency.js"></script>
+  </div>
+  <div class="my_dataviz" id="my_dataviz"style="position:absolute;top: 740px;left: 2000px; width: 100%;"></div>
+  <div class="my_dataviz1" id="my_dataviz1"style="position:absolute;top: 1100px;left: 2000px; width: 100%;"></div>
+  
+  <div style="position:absolute;top: 690px;left: 2000px; width: 100%;" class="rpc"></div>
+  <div style="position:absolute;top: 720px;left: 2000px; width: 100%;" class="service_name"></div>
+  <button type='button' id="reset" style="width: 100px; height: 50px; position:absolute;top: 700;left: 2620px;font-size: 20px;">Reset</button>
+  <div class="checkboxWrapper"></div>
+ 
+  <div id="double"> <script type="text/javascript" src="static/double_histogram.js"></script></div>
+  <form>
+    
+  </form>
+</body>
+
+</html>

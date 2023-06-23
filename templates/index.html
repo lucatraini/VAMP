@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+ 
+  <link rel="stylesheet" type="text/css" href="static/style.css">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+
+</head>
+
+<body>
+  
+  <div  style="float:left; display:block;" class="barchart" id="barchart">
+    <form>
+      <input type="search" id="searchBox" placeholder="Search..." style="width:200px; height:30px; font-size:20px">
+      <button id="myBtn" onclick="javascript:onChange()" style="height:30px; font-size:20px">Button</button>
+        <select id="service" style="width:500px; height:30px; font-size:20px">
+          {% for item in data %}
+          <option value="{{item}}">{{item}}</option>
+          {% endfor %}
+        </select>
+    </form>
+  
+    <script type="text/javascript" src="static/histogram.js"></script>
+  </div>
+  
+  <div style="float:left;">
+    <table id="table"></table>
+    <!--
+    <a href="javascript:prevPage()" id="btn_prev">Prev</a>
+    <a href="javascript:nextPage()" id="btn_next">Next</a>
+    page: <span id="page"></span>
+    -->
+  </div>
+  <div style="clear:both;"></div>
+  <!--
+  <div style="float:float" class="tree" id="tree">
+    <script type="text/javascript" src="static/tree.js"></script>
+  </div>
+  -->
+</body>
+
+</html>

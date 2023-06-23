@@ -1,0 +1,9 @@
+Download data from https://univaq-my.sharepoint.com/:u:/g/personal/luca_traini_univaq_it/EbIRQ-UgEpZMm_LniOU7ChgBBs6lNwpu2LGRGKufXyFwdw?e=NzyfUu
+
+tar -xvzf dump.tar.gz
+
+docker-compose up -d mongodb
+
+docker cp dump <container_name_or_id>:/tmp/dump
+
+docker exec <container_name_or_id> bash -c "mongorestore /tmp/dump"

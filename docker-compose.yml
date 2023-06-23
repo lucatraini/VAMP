@@ -1,0 +1,74 @@
+version: '3'
+services:
+  jaeger:
+    image: jaegertracing/all-in-one:1.15
+    environment:
+      - SPAN_STORAGE_TYPE=elasticsearch
+      - ES_SERVER_URLS=http://elasticsearch:9200
+      - PROCESSOR_JAEGER_COMPACT_SERVER_QUEUE_SIZE=10000000
+      - COLLECTOR_QUEUE_SIZE=10000000
+      - ES_MAX_SPAN_AGE=2880000000h0m0s
+    ports:
+      - 16686:16686
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    # depends_on:
+    #   - "elasticsearch"    
+    networks:
+      - my-network
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.8
+    environment:
+      #- bootstrap.system_call_filter=false
+      - discovery.type=single-node
+      #- STORAGE=elasticsearch
+      - ES_NODES=http://localhost:9200
+      - ES_USERNAME=user
+      - ES_PASSWORD=password
+      #- "ES_JAVA_OPTS=-Xms4g -Xmx4g"
+    volumes:
+      - train-ticket_es_volume:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - my-network
+    # healthcheck:
+    #     test: ["CMD", "curl", "-f", "http://localhost:9200"]
+    #     interval: 30s
+    #     timeout: 10s
+    #     retries: 5
+
+  mongodb:
+    image: mongo:latest
+    environment:
+      - MONGODB_INITDB_ROOT_USERNAME=user
+      - MONGODB_INITDB_ROOT_PASSWORD=pass
+    ports:
+      - "27017:27017" 
+    volumes: 
+      - mongodata:/mongo/data
+    networks:
+      - my-network
+  
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.17.8
+    environment:
+      SERVER_NAME: kibana.org 
+      ELASTICSEARCH_URL: http://localhost:9200
+    ports:
+      - "5601:5601"      
+    networks:
+      - my-network
+
+    
+networks:
+    my-network:
+      # driver: overlay
+      driver: bridge
+
+volumes:
+  train-ticket_es_volume:
+      external: true
+  mongodata:
