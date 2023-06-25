@@ -20,7 +20,7 @@ Lauch the following commands
 
 ### Start server
 
-``FLASK_DEBUG=1 FLASK_APP=app.py flask run -p 8080 --host=0.0.0.0``
+``FLASK_APP=app.py flask run -p 8080 --host=0.0.0.0``
 
 
 ### Hardware specs
