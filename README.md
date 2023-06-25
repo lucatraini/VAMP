@@ -14,6 +14,9 @@ Lauch the following commands
 
 ``docker exec <container_name_or_id> bash -c "mongorestore /tmp/dump"``
 
+## Install Python Dependecies
+``pip install -r  requirements.txt``
+
 ## Start server
 
 ``FLASK_DEBUG=1 FLASK_APP=app.py flask run -p 8080 --host=0.0.0.0``
