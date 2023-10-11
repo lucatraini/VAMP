@@ -27,4 +27,4 @@ Lauch the following commands
 We run VAMP on a dual Intel Xeon CPU E5-2650 v3 at 2.30GHz, totaling 40 cores and 62GB of RAM. We recommend to use VAMP on a machine with similar specs.
 
 ## Licensing
-VAMP is &copy; 2023 University of L'Aquila and licensed under the GPLv3 license. See the [LICENSE](./LICENSE) file for details.
+VAMP is licensed under the GPLv3 license. See the [LICENSE](./LICENSE) file for details.
